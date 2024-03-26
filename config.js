@@ -1,0 +1,18 @@
+export const config = {
+  owners: ['1058372220956721252'],
+  prefix: '',
+  botId: '1040868246154379294',
+  token: 'MTIyMjI3MTQwODEwNTg1Mjk3OA.Ga69kX.nz63u1qYqOFrlyTN4a_qd0XGIxr031qL51eZ7w',
+  AutoRoles: ['1222262991383433217'],
+  IconURL: 'https://i.imgur.com/uF2HsBO.gif',
+  DefaultTextChannel: '878922907345100810',
+  NotAllowedChannels: ['881574506404151336', '881571546018242600', '881574614713647166', '885655670412693534', '881570476323897344', '870653181435211837', '913502429855752243', '918178161290780682'],
+  JailChannels: ['913502429855752243', '888570808069415002', '881571546018242600', '881574614713647166', '898914174095224872', '886463781746651196'],
+  SearchLines: [`patience is a virtue..`, `wanna fight me fool?`, `but you're sus.`, `nice choice btw.`, `excellent choice ma lord.`, `always be a drunken sailor`, `I promise I won't crack.`, `aimi-sayo you're killing me.`, `also ilu aseel ❤️`, `also ilu بصراوي ❤️`, `and depression level increasing..`, `hold up, u Smolpeepee?`, `but I ain't judgin`, `but اصيل still عريض`],
+  DefaultRole: '47',
+  MuteEveryone: false,
+  DefaultVoiceChannel: '',
+  ClanLeaders: [''],
+  ClanRole: '',
+  EmbedColor: '',
+};
