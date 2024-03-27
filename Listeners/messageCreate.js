@@ -1,5 +1,5 @@
 import { config } from '../config.js';
-import { commands } from '../index.js';
+import { commands } from '../Struct/Client.js';
 
 export default {
     run: async (client, message) => {
