@@ -2,7 +2,6 @@ export const config = {
   owners: ['1058372220956721252'],
   prefix: '',
   botId: '1040868246154379294',
-  token: '',
   AutoRoles: ['1222262991383433217'],
   IconURL: 'https://i.imgur.com/uF2HsBO.gif',
   DefaultTextChannel: '878922907345100810',
