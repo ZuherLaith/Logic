@@ -26,7 +26,7 @@ export default {
             Recruit.roles.remove(role);
             if (Recruit.voice.channel) {
                 Recruit.voice.setMute(false);
-                Recruit.voice.setChannel(null);
+                setTimeout(() => { Recruit.voice.setChannel(null); }, 1000);
             }
          }, durationInMilliseconds);
          durationInfo = `${durationInMinutes}`;
@@ -41,7 +41,7 @@ export default {
        
        // Add duration information if provided
        if (durationInfo) {
-         embed.setAuthor({ name: `المستخدم ${Recruit.user.globalName} تم حظره وإرساله الى السجن ولمدة ${durationInfo} دقيقة`, iconURL: Recruit.user.avatarURL({ dynamic: true }) })
+         embed.setAuthor({ name: `المستخدم ${Recruit.user.globalName} تم حظره وإرساله الى السجن لمدة ${durationInfo} دقيقة`, iconURL: Recruit.user.avatarURL({ dynamic: true }) })
        }
        
        // Send the embed message
