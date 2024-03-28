@@ -42,28 +42,28 @@ const botId = config.botId
 /// Commands and Listeners ///
 export async function loadCommands(commands) {
   try {
-    // Read the directory ./Commands and its subdirectories
-    const directories = await readdir(join(__dirname, '..', 'Commands'), { withFileTypes: true });
-    for (const directory of directories) {
-      if (directory.isDirectory()) {
-        // Read command files in the current directory
-        const commandsInDir = await readdir(join(__dirname, '..', 'Commands', directory.name));
-        for (const commandFile of commandsInDir) {
-          // Check if the file is a JavaScript file
-          if (commandFile.endsWith('.js')) {
-            // Dynamically import the command module
-            const commandModule = await import(`../Commands/${directory.name}/${commandFile}`);
-            // Extract the default export (assuming it's the command object)
-            const command = commandModule.default;
-            // Add the command to the provided object
-            commands[command.name] = command;
+      // Read the directory ./Commands and its subdirectories
+      const directories = await readdir('./Commands', { withFileTypes: true });
+      for (const directory of directories) {
+          if (directory.isDirectory()) {
+              // Read command files in the current directory
+              const commandsInDir = await readdir(join('./Commands', directory.name));
+              for (const commandFile of commandsInDir) {
+                  // Check if the file is a JavaScript file
+                  if (commandFile.endsWith('.js')) {
+                      // Dynamically import the command module
+                      const commandModule = await import(`../Commands/${directory.name}/${commandFile}`);
+                      // Extract the default export (assuming it's the command object)
+                      const command = commandModule.default;
+                      // Add the command to the provided object
+                      commands[command.name] = command;
+                  }
+              }
           }
-        }
       }
-    }
-    console.log('Commands loaded successfully.');
+      console.log('Commands loaded successfully.');
   } catch (error) {
-    console.error('Error loading commands:', error);
+      console.error('Error loading commands:', error);
   }
 }
 async function loadListeners(directory = 'Listeners') {
