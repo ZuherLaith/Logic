@@ -89,15 +89,54 @@ async function loadListeners(directory = 'Listeners') {
 }
 
 
+
 loadCommands(commands);
 loadListeners();
 
+// Register slash commands
+// Commands Collection
+// const commands = new Discord.Collection();
+
+// Load slash commands
+// async function loadSlashCommands(directory = 'Commands') {
+//   try {
+//     const files = await readdir(directory, { withFileTypes: true });
+//     for (const file of files) {
+//       if (file.isFile() && file.name.endsWith('.js')) {
+//         const command = await import(`../${join(directory, file.name)}`);
+//         commands.set(command.default.data.name, command.default);
+//       }
+//     }
+//     console.log('Slash commands loaded successfully.');
+//   } catch (error) {
+//     console.error('Error loading slash commands:', error);
+//   }
+// }
+
+
 export function initializeClient(token) {
+
+  // await Promise.all([loadSlashCommands(), loadListeners()]);
+
   client.once('ready', () => {
       console.log('Started and Ready.');
   });
 
-  // client.on('raw', (data) => FastLink.other.handleRaw(data));
+  // Handle interaction events (slash commands)
+  // client.on('interactionCreate', async interaction => {
+  //   if (!interaction.isCommand()) return;
+
+  //   const command = commands.get(interaction.commandName);
+  //   if (!command) return;
+
+  //   try {
+  //     await command.execute(interaction);
+  //   } catch (error) {
+  //     console.error('Error executing command:', error);
+  //     await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
+  //   }
+  // });
+
   client.login(token);
 }
 

@@ -32,15 +32,15 @@ export default {
       let user = newState.guild.members.cache.get(newState.id);
       //   IF SPAMMER:
       if (SpammingTimes === 3 && !config.JailChannels.includes(newState.channelId)) {
-        let role = newState.guild.roles.cache.find(r => r.id === '1222513100931076147'); // Solo Jail ROle
+        let role = newState.guild.roles.cache.find(r => r.id === config.JailSoloRole); // Solo Jail ROle
         user.roles.add(role);
         setTimeout(() => { user.roles.remove(role); user.voice.setChannel(oldState.channelId); }, 300000);
         let Embed = new EmbedBuilder()
         .setAuthor({ name: `تم وضعك بالسجن الأنفرادي، بطل وكاحة شوي وتطلع منه تلقائي`, iconURL: user.user.avatarURL({ dynamic: true }) })
         .setColor(config.EmbedColor)
         .setTimestamp();
-        user.send("# <:hellnah:1222601226588524614> تم وضعك بالسجن الأنفرادي، بطل وكاحة شوي وراح تطلع منه تلقائي");
-        return user.voice.setChannel('1222598440433746103'); // Prison Break
+        user.send("# ⚠️ تم وضعك بالسجن الأنفرادي، بطل وكاحة شوي وراح تطلع منه تلقائي");
+        return user.voice.setChannel(config.JailChannels[0]); // Prison Break
       }
       if (newState.channelId !== oldState.channelId && !config.JailChannels.includes(newState.channelId)) { 
         SpammingTimes++;

@@ -24,9 +24,9 @@ export default {
          // Automatically remove jail role after the specified duration
          setTimeout(() => {
             Recruit.roles.remove(role);
-            if (Recruit.voice.channel) {
-                Recruit.voice.setMute(false);
-                setTimeout(() => { Recruit.voice.setChannel(null); }, 1000);
+            if (Recruit.voice?.channel) {
+                try { Recruit.voice?.setMute(false); } catch {}
+                setTimeout(() => { try { Recruit.voice.setChannel(null); } catch {} }, 1000);
             }
          }, durationInMilliseconds);
          durationInfo = `${durationInMinutes}`;
@@ -51,7 +51,7 @@ export default {
        Recruit.roles.add(role);
        await Ban(Recruit.user.id);
        if (Recruit.voice.channel) {
-        Recruit.voice.setChannel(config.JailChannels[0]);
+        Recruit.voice?.setChannel(config.JailChannels[0]);
        }
     }
     catch (e) { console.log("jailCommands: " + e); }

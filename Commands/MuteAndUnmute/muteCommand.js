@@ -35,27 +35,36 @@ export default {
                     await target.voice.setMute(true);
                 }
 
-                return message.reply(`<@${target.user.id}> has been muted in all text channels.`);
+                return message.reply(`<@${target.user.id}> has been muted.`);
             } else {
                 // Mute for a specified duration
                 message.guild.channels.cache.filter(channel => channel.type === ChannelType.GuildText).forEach(async channel => {
-                    await channel.permissionOverwrites.edit(target, {
-                        SEND_MESSAGES: false
-                    });
+                    await channel.permissionOverwrites.delete(target);
                 });
                 message.guild.channels.cache.filter(channel => channel.type === ChannelType.GuildVoice).forEach(async channel => {
-                    await channel.permissionOverwrites.edit(target, {
-                        SEND_MESSAGES: false
-                    });
+                    await channel.permissionOverwrites.delete(target);
                 });
 
                 // Mute in voice channel if member is connected
                 if (target.voice.channel) {
-                    await target.voice.setMute(true);
-                    message.reply(`<@${target.user.id}> has been muted for ${duration} minutes in all text channels.`);
+                    if (target.voice?.channel) { await target.voice?.setMute(true); }
+                    message.reply(`<@${target.user.id}> has been muted for ${duration} minutes.`);
                     setTimeout(async () => {
-                        await target.voice.setMute(false);
-                        message.channel.send(`<@${target.user.id}> has been unmuted after ${duration} minutes in all text channels.`);
+                        if (target.voice?.channel) { await target.voice?.setMute(false); }
+
+                        // Unmute for a specified duration
+                        message.guild.channels.cache.filter(channel => channel.type === ChannelType.GuildText).forEach(async channel => {
+                            await channel.permissionOverwrites.edit(target, {
+                                SendMessages: falstre
+                            });
+                        });
+                        message.guild.channels.cache.filter(channel => channel.type === ChannelType.GuildVoice).forEach(async channel => {
+                            await channel.permissionOverwrites.edit(target, {
+                                SendMessages: false
+                            });
+                        });
+
+                        message.channel.send(`<@${target.user.id}> has been unmuted for ${duration} minutes.`);
                     }, duration * 1000 * 60);
                 } else {
                     return message.reply('Member is not in a voice channel.');

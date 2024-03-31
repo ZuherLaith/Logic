@@ -22,8 +22,9 @@ export default {
                 await channel.permissionOverwrites.delete(target);
             });
             
-            target.voice.setMute(false);
-            message.reply(`${target.user.tag} has been unmuted.`);
+            if (target.voice?.channel) { target.voice?.setMute(false); }
+            message.reply(`<@${target.user.id}> has been unmuted.`);
         }
+        catch(e) { console.log("unmuteCommand: " + e) }
     }
 }

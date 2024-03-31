@@ -1,5 +1,6 @@
 import { config } from '../config.js';
 import { commands } from '../Struct/Client.js';
+import Discord from 'discord.js';
 
 export default {
     run: async (client, message) => {
@@ -33,6 +34,23 @@ export default {
         config.EmbedColor = message.guild.members.me.displayHexColor;
         if (message.author.bot || message.channel.type === "DM") return;
 
-        
+        ///////////////////////////// Delete Messages with Links //////////////////////////////
+        if (!message.member.permissions.has(Discord.PermissionsBitField.Flags.Administrator)) {
+            // Check if the message contains any links
+            const containsLink = /(https?:\/\/[^\s]+)/gi.test(message.content);
+
+            if (containsLink) {
+                try {
+                    // Delete the message
+                    await message.delete();
+                    // Optionally, you can send a warning message to the user
+                    await message.author.send(`# ⛔ تم حذف رسالتك لإحتوائها على رابط خارجي:
+                    \`${message.content}\``);
+                } catch (error) {
+                    console.error('Error deleting message:', error);
+                }
+            }
+        }
+        //////////////////////////////////////////////////////////////////////////////////////
     }
 }
