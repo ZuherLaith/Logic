@@ -16,7 +16,7 @@ export default {
 
             const target = message.mentions.members.first();
             if (!target) {
-                return message.reply('**منشن العضو الذي تريد تنفيذ الأمر عليه.**').then(msg => { setTimeout(() => msg.delete().catch(e=>{}), 6000) });
+                return message.reply('**⚠️ منشن العضو الذي تريد تنفيذ الأمر عليه.**').then(msg => { setTimeout(() => msg.delete().catch(e=>{}), 6000) });
             }
             
             const duration = parseInt(args[1]);

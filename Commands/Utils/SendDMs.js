@@ -14,12 +14,12 @@ export default {
         }
         if (!args[0])
         {
-            return message.reply('**⛔ يجب كتابة رسالة قبل إستعمال الأمر.**').then(msg => { setTimeout(() => msg.delete().catch(e=>{}), 6000) });
+            return message.reply('**⚠️ يجب كتابة رسالة محددة عند إستعمال الأمر.**').then(msg => { setTimeout(() => msg.delete().catch(e=>{}), 6000) });
         }
 
         // Check if the bot is currently sending a message
         if (isSendingMessage) {
-            return message.reply('**⛔ البوت يقوم بإرسال رسائل حاليا، يرجى الانتظار حتى الانتهاء.**').then(msg => { setTimeout(() => msg.delete().catch(e=>{}), 6000) });
+            return message.reply('**⚠️ البوت يقوم بإرسال رسائل حاليا، يرجى الانتظار حتى الانتهاء.**').then(msg => { setTimeout(() => msg.delete().catch(e=>{}), 6000) });
         }
 
         // Set the flag to indicate that the bot is sending a message

@@ -17,7 +17,7 @@ export default {
             const role = message.guild.roles.cache.find(r => r.id === config.MuteRole);
 
             if (!target) {
-                return message.reply('**منشن العضو الذي تريد تنفيذ الأمر عليه.**').then(msg => { setTimeout(() => msg.delete().catch(e=>{}), 6000) });
+                return message.reply('**⚠️ منشن العضو الذي تريد تنفيذ الأمر عليه.**').then(msg => { setTimeout(() => msg.delete().catch(e=>{}), 6000) });
             }
     
             target.roles.remove(role);
