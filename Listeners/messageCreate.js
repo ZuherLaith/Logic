@@ -16,7 +16,9 @@ export default {
         if (message.channel.id == config.DefaultCommandsChannel)
         { setTimeout(() => message.delete().catch(e=>{}), 750); }
 
-        config.EmbedColor = message.guild.members?.me?.displayHexColor;
+        if (message.guild && message.guild.members) {
+            config.EmbedColor = message.guild.members.me?.displayHexColor;
+        }
         
         ///////////////////////////// Delete Messages with Links //////////////////////////////
         if (!message.member.permissions.has(Discord.PermissionsBitField.Flags.Administrator)) {
