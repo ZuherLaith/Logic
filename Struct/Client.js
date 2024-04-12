@@ -37,8 +37,6 @@ const prefix = config.prefix
 const botId = config.botId
 // const token = process.env.TOKEN;
 
-// events.on('debug', console.log)
-
 /// Commands and Listeners ///
 export async function loadCommands(commands) {
   try {

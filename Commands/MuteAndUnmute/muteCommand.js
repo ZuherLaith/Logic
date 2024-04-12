@@ -1,19 +1,19 @@
 import Discord, { ChannelType } from 'discord.js';
 
 export default {
-    name: 'mute',
-    description: 'Mute a member in voice chat by mention with/without a period of time',
-    usage: '<@member> [duration in minutes]',
+    name: 'ميوت',
+    description: 'ميوت بالمنشن من الشات والفويس شات مع او بدون مدة محددة',
+    usage: '<@mention> [duration in minutes]',
     run: async (client, message, args) => {
         try 
         {
             if (!message.member.permissions.has(Discord.PermissionsBitField.Flags.MuteMembers)) {
-                return message.reply('You do not have permission to use this command.');
+                return message.reply('You do not have permission to use this command.').then(msg => { setTimeout(() => msg.delete().catch(e=>{}), 6000) });
             }
 
             const target = message.mentions.members.first();
             if (!target) {
-                return message.reply('Please mention a member to mute.');
+                return message.reply('Please mention a member to mute.').then(msg => { setTimeout(() => msg.delete().catch(e=>{}), 6000) });
             }
             
             const duration = parseInt(args[1]);
@@ -35,7 +35,7 @@ export default {
                     await target.voice.setMute(true);
                 }
 
-                return message.reply(`<@${target.user.id}> has been muted.`);
+                return message.reply(`<@${target.user.id}> has been muted.`).then(msg => { setTimeout(() => msg.delete().catch(e=>{}), 6000) });
             } else {
                 // Mute for a specified duration
                 message.guild.channels.cache.filter(channel => channel.type === ChannelType.GuildText).forEach(async channel => {
@@ -48,7 +48,7 @@ export default {
                 // Mute in voice channel if member is connected
                 if (target.voice.channel) {
                     if (target.voice?.channel) { await target.voice?.setMute(true); }
-                    message.reply(`<@${target.user.id}> has been muted for ${duration} minutes.`);
+                    message.reply(`<@${target.user.id}> has been muted for ${duration} minutes.`).then(msg => { setTimeout(() => msg.delete().catch(e=>{}), 6000) });
                     setTimeout(async () => {
                         if (target.voice?.channel) { await target.voice?.setMute(false); }
 
@@ -64,10 +64,10 @@ export default {
                             });
                         });
 
-                        message.channel.send(`<@${target.user.id}> has been unmuted for ${duration} minutes.`);
+                        message.channel.send(`<@${target.user.id}> has been unmuted for ${duration} minutes.`).then(msg => { setTimeout(() => msg.delete().catch(e=>{}), 6000) });
                     }, duration * 1000 * 60);
                 } else {
-                    return message.reply('Member is not in a voice channel.');
+                    return message.reply('Member is not in a voice channel.').then(msg => { setTimeout(() => msg.delete().catch(e=>{}), 6000) });
                 }
             }
         }

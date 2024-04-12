@@ -1,4 +1,5 @@
 import { EmbedBuilder } from 'discord.js';
+import { config } from '../config.js';
 
 const Color = {
   info: '#c6d7f5',
@@ -7,7 +8,7 @@ const Color = {
 };
 
 const CreateEmbed = (color, message) => {
-  Color.info = RoleColor; // Assuming RoleColor is defined elsewhere
+  Color.info = config.EmbedColor; // Assuming RoleColor is defined elsewhere
   const embed = new EmbedBuilder()
     .setColor(Color[color]);
     //.setFooter(`© カグチ ${new Date().getFullYear()}`);

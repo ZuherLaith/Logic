@@ -5,12 +5,12 @@ import prettyMilliseconds from 'pretty-ms';
 import { config } from '../../config.js';
 
 export default {
-    name: 'unjail',
-    description: 'Unjail a member by mention',
-    usage: '<@member> [duration in seconds]',
+    name: 'فك.سجن',
+    description: 'فك سجن عضو تم سجنه مسبقاً',
+    usage: '<@mention>',
     run: async (client, message, args) => {
     try {
-      const commandsChannel = client.channels.cache.get(config.DefaultCommandsChannel);
+      const commandsChannel = client.channels.cache.get(config.DefaultTextChannel);
       let Recruit = message.mentions.members.first();
       if (!Recruit) return message.reply({embeds: [CreateEmbed('warn', '').setAuthor({ name: "بربك هاي مادبرتها؟  |", iconURL: message.member.user.avatarURL({ dynamic: true }) })]}).then(msg => { setTimeout(() => msg.delete().catch(e=>{}), 5000) });
       
@@ -25,7 +25,7 @@ export default {
       
       let role = message.guild.roles.cache.find(r => r.id === config.JailRole);
       await Recruit.roles.remove(role);
-      if (Recruit.voice.channel) {
+      if (Recruit.voice?.channel) {
         await Recruit.voice.setMute(false);
         await Recruit.voice.setChannel(null);
       }

@@ -5,16 +5,18 @@ import prettyMilliseconds from 'pretty-ms';
 import { config } from '../../config.js';
 
 export default {
-    name: 'jail',
-    description: 'Jail a member by mention with/without a period of time',
-    usage: '<@member> [duration in seconds]',
+    name: 'سجن',
+    description: 'سجن عضو من الفويس شات فقط ومنعه من التحدث مع او بدون مدة محددة',
+    usage: '<@member> [duration in minutes]',
     run: async (client, message, args) => {
     try {
-      const commandsChannel = client.channels.cache.get(config.DefaultCommandsChannel);
+      const commandsChannel = client.channels.cache.get(config.DefaultTextChannel);
       const role = message.guild.roles.cache.find(r => r.id === config.JailRole);
       let Recruit = message.mentions.members.first();
       if (!Recruit) return message.reply({embeds: [CreateEmbed('warn', '').setAuthor({ name: "بربك هاي مادبرتها؟  |", iconURL: message.member.user.avatarURL({ dynamic: true })})]}).then(msg => { setTimeout(() => msg.delete().catch(e=>{}), 5000) });
+      // if (!Recruit.voice) return message.reply({embeds: [CreateEmbed('warn', '').setAuthor({ name: "العضو غير |", iconURL: message.member.user.avatarURL({ dynamic: true })})]}).then(msg => { setTimeout(() => msg.delete().catch(e=>{}), 5000) });
       
+
        // Check if a duration argument is provided
        const durationInMinutes = parseInt(args[1]);
        let durationInfo = '';
@@ -50,7 +52,7 @@ export default {
        // Jail the user
        Recruit.roles.add(role);
        await Ban(Recruit.user.id);
-       if (Recruit.voice.channel) {
+       if (Recruit.voice?.channel) {
         Recruit.voice?.setChannel(config.JailChannels[0]);
        }
     }

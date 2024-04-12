@@ -2,18 +2,14 @@ import { EmbedBuilder, ActionRowBuilder, ButtonBuilder } from 'discord.js';
 import { config } from '../../config.js';
 
 const voteKickDuration = 30 * 1000; // 30 seconds
-const kickDuration = 15 * 60 * 1000; // 15 minutes
+const kickDuration = 30 * 60 * 1000; // 30 minutes
 const votedMembers = new Set();
 
 export default {
-    name: 'vote',
+    name: 'طرد',
     description: 'تصويت طرد عضو من الفويس شات ومنع دخوله لمدة 30 دقيقة',
+    usage: '<@mention>',
     run: async (client, message, args) => {
-	// console.log(interaction);
-    //     console.log("client: " + client)
-    //     console.log("Message: " + message)
-    //     console.log("Args: " + args[0])
-        // await interaction.reply('This is a response to your command!');
         const YesButton = new ButtonBuilder()
         .setCustomId('YesButton')
         .setLabel('نعم')
@@ -31,23 +27,23 @@ export default {
         // Check if the message author is in a voice channel
         const voiceChannel = message.member.voice.channel;
         if (!voiceChannel) {
-            return message.reply('⛔ يجب عليك الانضمام الى فويس اولاً');
+            return message.reply('⛔ يجب عليك الانضمام الى فويس اولاً').then(msg => { setTimeout(() => msg.delete().catch(e=>{}), 6000) });
         }
         
         // Check if the voice channel has more than one member
         if (voiceChannel.members.size <= 2) {
-            return message.reply('⚠️ لا يوجد عدد اشخاص اكثر من 2 بالفويس');
+            return message.reply('⚠️ لا يوجد عدد اشخاص اكثر من 2 بالفويس').then(msg => { setTimeout(() => msg.delete().catch(e=>{}), 6000) });
         }
 
         // Get the member to be kicked
         const memberToKick = message.mentions.members.first();
         if (!memberToKick) {
-            return message.reply('⛔ لا يوجد عضو بهذا الإسم');
+            return message.reply('⛔ لا يوجد عضو بهذا الإسم').then(msg => { setTimeout(() => msg.delete().catch(e=>{}), 6000) });
         }
 
         // Check if both the member to be kicked and the requester are in the same voice channel
         if (!memberToKick.voice.channel || memberToKick.voice.channelId !== voiceChannel.id) {
-            return message.reply('⛔ يجب ان يكون الشخص المقصود بالطرد متواجد معك بالفويس');
+            return message.reply('⛔ يجب ان يكون الشخص المقصود بالطرد متواجد معك بالفويس').then(msg => { setTimeout(() => msg.delete().catch(e=>{}), 6000) });
         }
 
 
@@ -115,13 +111,13 @@ export default {
             voteKickMessage.delete();
 
             if (totalVotes === 0) {
-                await message.channel.send(`🙅🏻‍♂️ فشلت عملية تصويت طرد <@${memberToKick.user.id}> بسبب عدم المشاركة بالتصويت`);
+                await message.channel.send(`🙅🏻‍♂️ فشلت عملية تصويت طرد <@${memberToKick.user.id}> بسبب عدم المشاركة بالتصويت`).then(msg => { setTimeout(() => msg.delete().catch(e=>{}), 6000) });
             }
             else if (yesVotes > noVotes) {
                 // Kick the member
                 await memberToKick.voice?.setChannel(null);
-                await message.channel.send(`العضو <@${memberToKick.user.id}> تم طرده من الفويس <#${voiceChannel.id}> ولمدة 15 دقيقة ✅`);
-                // Prevent rejoining for 15 minutes
+                await message.channel.send(`العضو <@${memberToKick.user.id}> تم طرده من الفويس <#${voiceChannel.id}> ولمدة 30 دقيقة ✅`).then(msg => { setTimeout(() => msg.delete().catch(e=>{}), 15000) });
+                // Prevent rejoining for 30 minutes
                 await voiceChannel.permissionOverwrites.edit(memberToKick, {
                     Connect: false
                 });
@@ -131,10 +127,10 @@ export default {
                 }, kickDuration);
             }
             else if (yesVotes < noVotes) {
-                await message.channel.send(`🙅🏻‍♂️ فشلت عملية تصويت طرد <@${memberToKick.user.id}> بسبب الاتفاق على عدم طرده`);
+                await message.channel.send(`🙅🏻‍♂️ فشلت عملية تصويت طرد <@${memberToKick.user.id}> بسبب الاتفاق على عدم طرده`).then(msg => { setTimeout(() => msg.delete().catch(e=>{}), 15000) });
             }
             else if (yesVotes === noVotes) {
-                await message.channel.send(`🙅🏻‍♂️ فشلت عملية تصويت طرد <@${memberToKick.user.id}> بسبب تعادل نتائج التصويت`);
+                await message.channel.send(`🙅🏻‍♂️ فشلت عملية تصويت طرد <@${memberToKick.user.id}> بسبب تعادل نتائج التصويت`).then(msg => { setTimeout(() => msg.delete().catch(e=>{}), 15000) });
             }
         });
 

@@ -24,10 +24,10 @@ export default {
     // IF A USER IS VOICE BANNED:
     if (bannedDatabase.includes(newState.id)) {
       // LOCKING THE PRISON WHEN NO ONE IS IN IT... req:Administrator
-    //   const role = newState.guild.roles.cache.get("878638612835614730");
-    //   const channel = newState.guild.channels.cache.get("913502429855752243");
-    //   if (channel.members.size > 0) { channel.permissionOverwrites.edit(role, { CONNECT: true }); }
-    //   if (channel.members.size === 0) { channel.permissionOverwrites.edit(role, { CONNECT: false }); }
+      const role = newState.guild.roles.cache.get("1215723431908221009");
+      const channel = newState.guild.channels.cache.get("1224363152607543346");
+      if (channel.members.size > 0) { channel.permissionOverwrites.edit(role, { ViewChannel: true }); }
+      if (channel.members.size === 0) { channel.permissionOverwrites.edit(role, { ViewChannel: false }); }
 
       let user = newState.guild.members.cache.get(newState.id);
       //   IF SPAMMER:
