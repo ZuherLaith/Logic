@@ -31,8 +31,8 @@ export default {
                 });
 
                 // Mute in voice channel if member is connected
-                if (target.voice.channel) {
-                    await target.voice.setMute(true);
+                if (target.voice?.channel) {
+                    await target.voice?.setMute(true);
                 }
 
                 return message.reply(`<@${target.user.id}> has been muted.`).then(msg => { setTimeout(() => msg.delete().catch(e=>{}), 6000) });
@@ -46,7 +46,7 @@ export default {
                 });
 
                 // Mute in voice channel if member is connected
-                if (target.voice.channel) {
+                if (target.voice?.channel) {
                     if (target.voice?.channel) { await target.voice?.setMute(true); }
                     message.reply(`<@${target.user.id}> has been muted for ${duration} minutes.`).then(msg => { setTimeout(() => msg.delete().catch(e=>{}), 6000) });
                     setTimeout(async () => {
