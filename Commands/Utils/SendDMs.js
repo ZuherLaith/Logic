@@ -1,4 +1,5 @@
 import Discord from 'discord.js';
+let isSendingMessage = false;
 
 export default {
     name: 'dm',
@@ -14,25 +15,44 @@ export default {
             return message.reply('**⛔ يجب كتابة رسالة قبل إستعمال الأمر.**').then(msg => { setTimeout(() => msg.delete().catch(e=>{}), 6000) });
         }
 
+        // Check if the bot is currently sending a message
+        if (isSendingMessage) {
+            return message.reply('**⛔ البوت يقوم بإرسال رسائل حاليا، يرجى الانتظار حتى الانتهاء.**').then(msg => { setTimeout(() => msg.delete().catch(e=>{}), 6000) });
+        }
+
+        // Set the flag to indicate that the bot is sending a message
+        isSendingMessage = true;
+
+        // Temporary message to notify the user that the bot is sending messages
+        const tempMessage = await message.channel.send('**<a:image5:825489545768075274> جارٍ إرسال الرسائل...**');
+
         // Get the message content
         try {
             const guild = message.guild;
             const members = await guild.members.fetch();
 
-            members.forEach(async member => {
+            for (const member of members.values()) {
                 if (member.user.bot || member.user.id === message.author.id) {
-                    return;
+                    continue;
                 }
 
                 try {
                     await member.send(args.join(' '));
+                    // Add a delay to avoid rate limiting
+                    await new Promise(resolve => setTimeout(resolve, 500)); // 500 milliseconds (0.5 second) delay
                 } catch (error) {
                     console.error(`Failed to send message to ${member.user.tag}: ${error}`);
                 }
-            });
+            }
         } catch (error) {
             console.error('Error sending message to everyone:', error);
         }
+
+        // Reset the flag after completing the message sending process
+        isSendingMessage = false;
+
+        // Delete the temporary message
+        tempMessage.delete().catch(error => console.error('Failed to delete temporary message:', error));
 
         // Reply to the command user
         message.reply('**تم إرسال رسالتك الى الجميع بنجاح ✅**').then(msg => { setTimeout(() => msg.delete().catch(e=>{}), 6000) });
