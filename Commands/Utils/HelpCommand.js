@@ -13,7 +13,7 @@ export default {
     usage: '',
     run: async (client, message, args) => {
         if (!message.member.permissions.has(Discord.PermissionsBitField.Flags.Administrator)) {
-            return message.reply('⛔ ليس لديك الصلاحيات لإستخدام هذا الأمر.').then(msg => { setTimeout(() => msg.delete().catch(e=>{}), 6000) });
+            return message.reply('**⛔ ليس لديك الصلاحيات لإستخدام هذا الأمر.**').then(msg => { setTimeout(() => msg.delete().catch(e=>{}), 6000) });
         }
         
         function getCommands(dir) {
@@ -49,7 +49,7 @@ export default {
             // .setAuthor('')
             .setDescription(commandList.join('\n\n'))
             .setColor(config.EmbedColor) // Green color for the embed
-            .setFooter({ text: `Use ${prefix}<command> to get more details about a specific command`, iconURL: message.author.avatarURL({ dynamic: true }) })
+            .setFooter({ text: `الاوامر تعمل فقط في هذه المحادثة.`, iconURL: message.author.avatarURL({ dynamic: true }) })
 
         message.channel.send({ content: '# 🌐 قائمة الاوامر', embeds: [helpEmbed] }); //.then(msg => { setTimeout(() => msg.delete().catch(e=>{}), 30000) });
     },

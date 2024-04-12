@@ -12,7 +12,7 @@ export default {
     run: async (client, message, args) => {
     try {
       if (!message.member.permissions.has(Discord.PermissionsBitField.Flags.Administrator)) {
-        return message.reply('⛔ ليس لديك الصلاحيات لإستخدام هذا الأمر.').then(msg => { setTimeout(() => msg.delete().catch(e=>{}), 6000) });
+        return message.reply('**⛔ ليس لديك الصلاحيات لإستخدام هذا الأمر.**').then(msg => { setTimeout(() => msg.delete().catch(e=>{}), 6000) });
       }
 
       const commandsChannel = client.channels.cache.get(config.DefaultTextChannel);

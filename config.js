@@ -12,6 +12,7 @@ export const config = {
   JailRole: '1224361161018052638',
   JailSoloRole: '1224361283407577148',
   ///////////////////
+  MuteRole: '1221415338680520824',
   MuteEveryone: false,
-  EmbedColor: '#000000',
+  EmbedColor: '#246498',
 };
