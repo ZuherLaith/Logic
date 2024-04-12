@@ -1,6 +1,7 @@
 import { readdirSync } from 'fs';
 // import { CreateEmbed } from '../../Struct/CreateEmbed.js';
 import { EmbedBuilder } from 'discord.js';
+import Discord from 'discord.js';
 import { config } from '../../config.js';
 import { join, relative } from 'path';
 

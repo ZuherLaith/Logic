@@ -1,4 +1,5 @@
-import Discord, { ChannelType }  from 'discord.js';
+import { ChannelType }  from 'discord.js';
+import Discord from 'discord.js';
 
 export default {
     name: 'فك.ميوت',

@@ -1,4 +1,5 @@
 import { EmbedBuilder } from 'discord.js';
+import Discord from 'discord.js';
 import { CreateEmbed } from '../../Struct/CreateEmbed.js';
 import { UnBan, ReturnBanList, Ban } from '../../Struct/GuildDB.js'
 import prettyMilliseconds from 'pretty-ms';
