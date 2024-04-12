@@ -41,7 +41,7 @@ export default {
                 try {
                     await member.send(args.join(' '));
                     // Add a delay to avoid rate limiting
-                    await new Promise(resolve => setTimeout(resolve, 500)); // 500 milliseconds (0.5 second) delay
+                    await new Promise(resolve => setTimeout(resolve, 100)); // 100 milliseconds (0.1 second) delay
                 } catch (error) {
                     consoleError(`Failed to send message to ${member.user.tag}: ${error}`);
                 }
