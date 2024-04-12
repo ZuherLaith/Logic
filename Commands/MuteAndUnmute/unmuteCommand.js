@@ -1,11 +1,13 @@
 import Discord, { ChannelType }  from 'discord.js';
 import { config } from '../../config.js';
+import { consoleLog, consoleWarn, consoleError } from '../../Struct/logger.js';
 
 export default {
     name: 'فك.ميوت',
     description: 'فك ميوت عضو محدد من الفويس والمحادثة.',
     usage: '<@mention>',
     run: async (client, message, args) => {
+        consoleLog(`Member [${message.member.displayName}] is using Unmute Command, (${message.content})`)
         try {
             if (!message.member.permissions.has(Discord.PermissionsBitField.Flags.MuteMembers)) {
                 return message.reply('**⛔ ليس لديك الصلاحيات لإستخدام هذا الأمر.**').then(msg => { setTimeout(() => msg.delete().catch(e=>{}), 6000) });
@@ -23,6 +25,6 @@ export default {
             if (target.voice?.channel) { target.voice?.setMute(false); }
             message.reply(`**<@${target.user.id}> has been unmuted.**`).then(msg => { setTimeout(() => msg.delete().catch(e=>{}), 6000) });
         }
-        catch(e) { console.log("unmuteCommand: " + e) }
+        catch(e) { consoleError("unmuteCommand: " + e) }
     }
 }

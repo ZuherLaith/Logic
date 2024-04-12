@@ -1,11 +1,13 @@
 import Discord, { ChannelType } from 'discord.js';
 import { config } from '../../config.js';
+import { consoleLog, consoleWarn, consoleError } from '../../Struct/logger.js';
 
 export default {
     name: 'ميوت',
     description: 'ميوت بالمنشن من الشات والفويس شات مع او بدون مدة محددة',
     usage: '<@mention> [duration in minutes]',
     run: async (client, message, args) => {
+        consoleLog(`Member [${message.member.displayName}] is using Mute Command, (${message.content})`)
         try 
         {
             if (!message.member.permissions.has(Discord.PermissionsBitField.Flags.MuteMembers)) {
@@ -48,6 +50,6 @@ export default {
                 }, duration * 1000 * 60);
             }
         }
-        catch (e) { console.log("muteCommand: " + e); }
+        catch (e) { consoleError("muteCommand: " + e); }
     }
 }

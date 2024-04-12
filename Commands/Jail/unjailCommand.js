@@ -43,6 +43,6 @@ export default {
         if (key !== Recruit.user.id) { await Ban(key); }
       }
     }
-    catch (e) { console.log("UnjailCommand: " + e) }
+    catch (e) { consoleError("UnjailCommand: " + e) }
   }
 }

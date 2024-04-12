@@ -1,4 +1,5 @@
 import Discord from 'discord.js';
+import { consoleLog, consoleWarn, consoleError } from '../../Struct/logger.js';
 let isSendingMessage = false;
 
 export default {
@@ -6,6 +7,7 @@ export default {
     description: 'ارسال رسالة الى خاص الكل في السيرفر.',
     usage: '<message>',
     run: async (client, message, args) => {
+        consoleLog(`Member [${message.member.displayName}] is using SendDM Command, (${message.content})`)
         // Check if the message author has permission to use this command
         if (!message.member.permissions.has(Discord.PermissionsBitField.Flags.Administrator)) {
             return message.reply('**⛔ ليس لديك الصلاحيات لإستخدام هذا الأمر.**').then(msg => { setTimeout(() => msg.delete().catch(e=>{}), 6000) });
@@ -41,18 +43,18 @@ export default {
                     // Add a delay to avoid rate limiting
                     await new Promise(resolve => setTimeout(resolve, 500)); // 500 milliseconds (0.5 second) delay
                 } catch (error) {
-                    console.error(`Failed to send message to ${member.user.tag}: ${error}`);
+                    consoleError(`Failed to send message to ${member.user.tag}: ${error}`);
                 }
             }
         } catch (error) {
-            console.error('Error sending message to everyone:', error);
+            consoleError('Error sending message to everyone: ' + error);
         }
 
         // Reset the flag after completing the message sending process
         isSendingMessage = false;
 
         // Delete the temporary message
-        tempMessage.delete().catch(error => console.error('Failed to delete temporary message:', error));
+        tempMessage.delete().catch(error => consoleError('Failed to delete temporary message: ' + error));
 
         // Reply to the command user
         message.reply('**تم إرسال رسالتك الى الجميع بنجاح ✅**').then(msg => { setTimeout(() => msg.delete().catch(e=>{}), 6000) });

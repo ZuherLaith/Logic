@@ -1,5 +1,6 @@
 import { EmbedBuilder, ActionRowBuilder, ButtonBuilder } from 'discord.js';
 import { config } from '../../config.js';
+import { consoleLog, consoleWarn, consoleError } from '../../Struct/logger.js';
 
 const voteKickDuration = 30 * 1000; // 30 seconds
 const kickDuration = 30 * 60 * 1000; // 30 minutes
@@ -10,6 +11,8 @@ export default {
     description: 'تصويت طرد عضو من الفويس شات ومنع دخوله لمدة 30 دقيقة',
     usage: '<@mention>',
     run: async (client, message, args) => {
+        consoleLog(`Member [${message.member.displayName}] is using SendDM Command, (${message.content})`)
+
         const YesButton = new ButtonBuilder()
         .setCustomId('YesButton')
         .setLabel('نعم')
@@ -100,7 +103,7 @@ export default {
             // Defer the update of the button interaction
             // interaction.deferUpdate();
         
-            console.log(`Yes Votes: ${yesVotes}, No Votes: ${noVotes}`);
+            // consoleLog(`Yes Votes: ${yesVotes}, No Votes: ${noVotes}`);
         });
 
         collector.on('end', async () => {
