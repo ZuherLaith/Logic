@@ -1,5 +1,5 @@
-import { ChannelType } from 'discord.js';
-import Discord from 'discord.js';
+import { Discord, ChannelType } from 'discord.js';
+// import Discord from 'discord.js';
 
 export default {
     name: 'ميوت',
