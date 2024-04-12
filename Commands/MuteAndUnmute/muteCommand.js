@@ -1,11 +1,31 @@
 import Discord, { ChannelType } from 'discord.js';
-// import Discord from 'discord.js';
 
 export default {
     name: 'ميوت',
     description: 'ميوت بالمنشن من الشات والفويس شات مع او بدون مدة محددة',
     usage: '<@mention> [duration in minutes]',
     run: async (client, message, args) => {
+        async function slowPermissionEdit(message, target) {
+            const textChannels = Array.from(message.guild.channels.cache.filter(channel => channel.type === ChannelType.GuildText).values());
+            const voiceChannels = Array.from(message.guild.channels.cache.filter(channel => channel.type === ChannelType.GuildVoice).values());
+        
+            // Define a function to edit permission overwrites with a delay
+            async function editPermissions(channelArray) {
+                for (const channel of channelArray) {
+                    await channel.permissionOverwrites.edit(target, {
+                        SendMessages: false
+                    });
+                    await new Promise(resolve => setTimeout(resolve, 500)); // 1000ms delay
+                }
+            }
+        
+            // Edit permission overwrites for text channels with a delay
+            await editPermissions(textChannels);
+        
+            // Edit permission overwrites for voice channels with a delay
+            await editPermissions(voiceChannels);
+        }
+
         try 
         {
             if (!message.member.permissions.has(Discord.PermissionsBitField.Flags.MuteMembers)) {
@@ -19,17 +39,11 @@ export default {
             
             const duration = parseInt(args[1]);
             if (isNaN(duration)) {
+                console.log("passed")
                 // Mute in text channels
-                message.guild.channels.cache.filter(channel => channel.type === ChannelType.GuildText).forEach(async channel => {
-                    await channel.permissionOverwrites.edit(target, {
-                        SendMessages: false
-                    });
-                });
-                message.guild.channels.cache.filter(channel => channel.type === ChannelType.GuildVoice).forEach(async channel => {
-                    await channel.permissionOverwrites.edit(target, {
-                        SendMessages: false
-                    });
-                });
+                slowPermissionEdit(message, target)
+                .then(() => console.log("Permissions edited successfully with delay"))
+                .catch(error => console.error("Error editing permissions:", error));
 
                 // Mute in voice channel if member is connected
                 if (target.voice?.channel) {

@@ -12,7 +12,8 @@ export default {
         /////////////////////////////////////////////////////
 
         if (!message.content.startsWith(config.prefix) || message.author.bot || message.channel.type === "DM") return;
-
+        config.EmbedColor = message.guild.members?.me?.displayHexColor;
+        
         ///////////////////////////// Delete Messages with Links //////////////////////////////
         if (!message.member.permissions.has(Discord.PermissionsBitField.Flags.Administrator)) {
             // Check if the message contains any links
@@ -54,6 +55,5 @@ export default {
         }
 
         
-        config.EmbedColor = message.guild.members?.me?.displayHexColor;
     }
 }
