@@ -4,12 +4,14 @@ import { CreateEmbed } from '../../Struct/CreateEmbed.js';
 import { Ban } from '../../Struct/GuildDB.js'
 import prettyMilliseconds from 'pretty-ms';
 import { config } from '../../config.js';
+import { consoleLog, consoleWarn, consoleError } from '../../Struct/logger.js';
 
 export default {
     name: 'سجن',
     description: 'سجن عضو من الفويس شات فقط ومنعه من التحدث مع او بدون مدة محددة',
     usage: '<@member> [duration in minutes]',
     run: async (client, message, args) => {
+    consoleLog(`Member [${message.member.displayName}] is using Jail Command, (${message.content})`)
     try {
       if (!message.member.permissions.has(Discord.PermissionsBitField.Flags.Administrator)) {
         return message.reply('**⛔ ليس لديك الصلاحيات لإستخدام هذا الأمر.**').then(msg => { setTimeout(() => msg.delete().catch(e=>{}), 6000) });
@@ -60,6 +62,6 @@ export default {
         Recruit.voice?.setChannel(config.JailChannels[0]);
        }
     }
-    catch (e) { console.log("jailCommands: " + e); }
+    catch (e) { consoleError("jailCommands: " + e); }
   }
 }

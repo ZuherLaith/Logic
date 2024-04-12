@@ -4,12 +4,14 @@ import { CreateEmbed } from '../../Struct/CreateEmbed.js';
 import { UnBan, ReturnBanList, Ban } from '../../Struct/GuildDB.js'
 import prettyMilliseconds from 'pretty-ms';
 import { config } from '../../config.js';
+import { consoleLog, consoleWarn, consoleError } from '../../Struct/logger.js';
 
 export default {
     name: 'فك.سجن',
     description: 'فك سجن عضو تم سجنه مسبقاً',
     usage: '<@mention>',
     run: async (client, message, args) => {
+    consoleLog(`Member [${message.member.displayName}] is using Unjail Command, (${message.content})`)
     try {
       if (!message.member.permissions.has(Discord.PermissionsBitField.Flags.Administrator)) {
         return message.reply('**⛔ ليس لديك الصلاحيات لإستخدام هذا الأمر.**').then(msg => { setTimeout(() => msg.delete().catch(e=>{}), 6000) });
