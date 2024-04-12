@@ -92,7 +92,25 @@ loadListeners();
 
 export function initializeClient(token) {
   client.once('ready', () => {
-      console.log('Started and Ready.');
+    // Finalizing bot starting and send a ready message into console:
+    const currentDate = new Date();
+
+    const day = currentDate.getDate().toString().padStart(2, '0');
+    const month = (currentDate.getMonth() + 1).toString().padStart(2, '0'); // Months are 0-indexed
+    const year = currentDate.getFullYear();
+
+    const hours = currentDate.getHours().toString().padStart(2, '0');
+    const minutes = currentDate.getMinutes().toString().padStart(2, '0');
+    const seconds = currentDate.getSeconds().toString().padStart(2, '0');
+
+    const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    const dayOfWeek = daysOfWeek[currentDate.getDay()];
+
+    const fullDate = `${day}/${month}/${year}`;
+    const fullTime = `${hours}:${minutes}:${seconds}`;
+    const fullDay = `${dayOfWeek}`;
+
+    consoleLog(`Started and Ready, Date: ${fullDate}, Time: ${fullTime}, Day: ${fullDay}, Year: ${year}`);
   });
 
   client.login(token);
