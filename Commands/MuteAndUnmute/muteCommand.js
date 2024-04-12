@@ -8,7 +8,7 @@ export default {
         try 
         {
             if (!message.member.permissions.has(Discord.PermissionsBitField.Flags.MuteMembers)) {
-                return message.reply('You do not have permission to use this command.').then(msg => { setTimeout(() => msg.delete().catch(e=>{}), 6000) });
+                return message.reply('⛔ ليس لديك الصلاحيات لإستخدام هذا الأمر.').then(msg => { setTimeout(() => msg.delete().catch(e=>{}), 6000) });
             }
 
             const target = message.mentions.members.first();

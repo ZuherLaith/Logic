@@ -10,11 +10,14 @@ export default {
     usage: '<@member> [duration in minutes]',
     run: async (client, message, args) => {
     try {
+      if (!message.member.permissions.has(Discord.PermissionsBitField.Flags.Administrator)) {
+        return message.reply('⛔ ليس لديك الصلاحيات لإستخدام هذا الأمر.').then(msg => { setTimeout(() => msg.delete().catch(e=>{}), 6000) });
+      }
+
       const commandsChannel = client.channels.cache.get(config.DefaultTextChannel);
       const role = message.guild.roles.cache.find(r => r.id === config.JailRole);
       let Recruit = message.mentions.members.first();
       if (!Recruit) return message.reply({embeds: [CreateEmbed('warn', '').setAuthor({ name: "بربك هاي مادبرتها؟  |", iconURL: message.member.user.avatarURL({ dynamic: true })})]}).then(msg => { setTimeout(() => msg.delete().catch(e=>{}), 5000) });
-      // if (!Recruit.voice) return message.reply({embeds: [CreateEmbed('warn', '').setAuthor({ name: "العضو غير |", iconURL: message.member.user.avatarURL({ dynamic: true })})]}).then(msg => { setTimeout(() => msg.delete().catch(e=>{}), 5000) });
       
 
        // Check if a duration argument is provided

@@ -11,6 +11,9 @@ export default {
     description: 'عرض قائمة الاوامر',
     usage: '',
     run: async (client, message, args) => {
+        if (!message.member.permissions.has(Discord.PermissionsBitField.Flags.Administrator)) {
+            return message.reply('⛔ ليس لديك الصلاحيات لإستخدام هذا الأمر.').then(msg => { setTimeout(() => msg.delete().catch(e=>{}), 6000) });
+        }
         
         function getCommands(dir) {
             const dirents = readdirSync(dir, { withFileTypes: true });

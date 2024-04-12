@@ -10,6 +10,10 @@ export default {
     usage: '<@mention>',
     run: async (client, message, args) => {
     try {
+      if (!message.member.permissions.has(Discord.PermissionsBitField.Flags.Administrator)) {
+        return message.reply('⛔ ليس لديك الصلاحيات لإستخدام هذا الأمر.').then(msg => { setTimeout(() => msg.delete().catch(e=>{}), 6000) });
+      }
+
       const commandsChannel = client.channels.cache.get(config.DefaultTextChannel);
       let Recruit = message.mentions.members.first();
       if (!Recruit) return message.reply({embeds: [CreateEmbed('warn', '').setAuthor({ name: "بربك هاي مادبرتها؟  |", iconURL: message.member.user.avatarURL({ dynamic: true }) })]}).then(msg => { setTimeout(() => msg.delete().catch(e=>{}), 5000) });
