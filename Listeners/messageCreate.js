@@ -21,7 +21,8 @@ export default {
         }
         
         ///////////////////////////// Delete Messages with Links //////////////////////////////
-        if (!message.member.permissions.has(Discord.PermissionsBitField.Flags.Administrator)) {
+        if (message.member && !message.member.permissions.has(Discord.PermissionsBitField.Flags.Administrator)) {
+
             // Check if the message contains any links
             const containsLink = /(https?:\/\/[^\s]+)/gi.test(message.content);
 
