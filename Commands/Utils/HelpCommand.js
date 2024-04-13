@@ -14,7 +14,7 @@ export default {
     usage: '',
     run: async (client, message, args) => {
         consoleLog(`Member [${message.member.displayName}] is using Help Command, (${message.content})`)
-        if (!message.member.permissions.has(Discord.PermissionsBitField.Flags.Administrator)) {
+        if (!message.member.permissions?.has(Discord.PermissionsBitField.Flags.Administrator)) {
             return message.reply('**⛔ ليس لديك الصلاحيات لإستخدام هذا الأمر.**').then(msg => { setTimeout(() => msg.delete().catch(e=>{}), 6000) });
         }
         
