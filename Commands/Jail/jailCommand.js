@@ -20,7 +20,7 @@ export default {
       const commandsChannel = client.channels.cache.get(config.DefaultTextChannel);
       const role = message.guild.roles.cache.find(r => r.id === config.JailRole);
       let Recruit = message.mentions.members.first();
-      if (!Recruit) return message.reply({embeds: [CreateEmbed('warn', '').setAuthor({ name: "**بربك هاي مادبرتها؟  |**", iconURL: message.member.user.avatarURL({ dynamic: true })})]}).then(msg => { setTimeout(() => msg.delete().catch(e=>{}), 5000) });
+      if (!Recruit) return message.reply({embeds: [CreateEmbed('warn', '').setAuthor({ name: "بربك هاي مادبرتها؟  |", iconURL: message.member.user.avatarURL({ dynamic: true })})]}).then(msg => { setTimeout(() => msg.delete().catch(e=>{}), 5000) });
       
        // Check if a duration argument is provided
        const durationInMinutes = parseInt(args[1]);
