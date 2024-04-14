@@ -15,7 +15,11 @@ export default {
         if (!message.content.startsWith(config.prefix) || message.author.bot || message.channel.type === "DM") return;
         // Remove every message in Commands channel:
         if (message.channel.id == config.DefaultCommandsChannel)
-        { setTimeout(() => message.delete().catch(e=>{}), 750); }
+        { 
+            if (message.author.id !== message.client.user.id) {
+                setTimeout(() => message.delete().catch(e => {}), 750);
+            }
+        }
 
         if (message.guild && message.guild.members) {
             config.EmbedColor = message.guild.members.me?.displayHexColor;
