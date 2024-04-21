@@ -12,13 +12,12 @@ export default {
                 return message.reply('**⛔ ليس لديك الصلاحيات لإستخدام هذا الأمر.**').then(msg => { setTimeout(() => msg.delete().catch(e=>{}), 6000) });
             }
             const amount = message.content.split(' ').slice(1).join(' ')
-            console.log(amount)
             if (!amount) { amount = 1 }
             const allMessages = await message.channel.messages.fetch({limit: amount});
             const deletable = allMessages.filter(message => !message.pinned);
             await message.channel.bulkDelete(deletable, true);
             
-            message.reply('**✅ رسالة ${amount} مسح .**').then(msg => { setTimeout(() => msg.delete().catch(e=>{}), 6000) });
+            message.channel.send('**✅ رسالة ${amount} مسح .**').then(msg => { setTimeout(() => msg.delete().catch(e=>{}), 6000) });
         }
         catch (e) { console.log(e) }
     }
