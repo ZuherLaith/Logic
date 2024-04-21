@@ -1,5 +1,5 @@
 import { config } from '../config.js';
-import { consoleLog, consoleWarn, consoleError } from '../../Struct/logger.js';
+import { consoleLog, consoleWarn, consoleError } from '../Struct/logger.js';
 const autoRoles = config.AutoRoles;
 
 export default {
