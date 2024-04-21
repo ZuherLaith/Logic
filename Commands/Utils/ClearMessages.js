@@ -19,7 +19,7 @@ export default {
             const deletable = allMessages.filter(message => !message.pinned);
             await message.channel.bulkDelete(deletable, true);
             
-            message.channel.send({embeds: [CreateEmbed().setAuthor({ name: `**رسالة ${amount} مسح ✅.**`, iconURL: message.member.user.avatarURL({ dynamic: true })})]}).then(msg => { setTimeout(() => msg.delete().catch(e=>{}), 6000) });
+            message.reply('**✅ رسالة ${amount} مسح .**').then(msg => { setTimeout(() => msg.delete().catch(e=>{}), 6000) });
         }
         catch (e) { console.log(e) }
     }
