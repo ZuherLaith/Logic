@@ -1,4 +1,5 @@
 import { config } from '../config.js';
+import { consoleLog, consoleWarn, consoleError } from '../../Struct/logger.js';
 const autoRoles = config.AutoRoles;
 
 export default {
@@ -8,13 +9,13 @@ export default {
               const role = member.guild.roles.cache.get(roleId);
               if (role) {
                 await member.roles.add(role);
-                console.log(`Auto role "${role.name}" assigned to ${member.user.tag}.`);
+                consoleLog(`Auto role "${role.name}" assigned to ${member.user.tag}.`);
               } else {
-                console.log(`Role with ID ${roleId} not found. Skipping.`);
+                consoleLog(`Role with ID ${roleId} not found. Skipping.`);
               }
             }
         } catch (error) {
-            console.error('Error assigning auto roles:', error);
+          consoleWarn('Error assigning auto roles: ' + error);
         }
     }
 }
