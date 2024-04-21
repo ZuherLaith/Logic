@@ -17,7 +17,7 @@ export default {
             const deletable = allMessages.filter(message => !message.pinned);
             await message.channel.bulkDelete(deletable, true);
             
-            message.channel.send('**✅ رسالة ${amount} مسح .**').then(msg => { setTimeout(() => msg.delete().catch(e=>{}), 6000) });
+            message.channel.send(`**✅ رسالة ${amount} مسح .**`).then(msg => { setTimeout(() => msg.delete().catch(e=>{}), 6000) });
         }
         catch (e) { console.log(e) }
     }
