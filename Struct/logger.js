@@ -23,21 +23,21 @@ async function writeToLogFile(message, logType) {
 }
 
 export async function consoleLog(message) {
-  console.log(`${chalk.bgWhiteBright('[LOG]')} ${chalk.cyanBright(message)}`);
+  console.log(`\u001b[46m[LOG]\u001b[0m \u001b[36m${(message)}\u001b[0m`);
   await writeToLogFile(message, 'LOG');
 }
 
 export async function consoleWarn(message) {
-  console.warn(`${chalk.bgYellowBright('[WARN]')} ${chalk.yellowBright(message)}`);
+  console.warn(`\u001b[43m[WARN]\u001b[0m \u001b[33m${(message)}\u001b[0m`);
   await writeToLogFile(message, 'WARN');
 }
 
 export async function consoleError(message) {
-  console.error(`${chalk.bgRedBright('[ERROR]')} ${chalk.redBright(message)}`);
+  console.error(`\u001b[41m[ERROR]\u001b[0m \u001b[31m${(message)}\u001b[0m`);
   await writeToLogFile(message, 'ERROR');
 }
 
 export async function consoleFL(message) {
-  console.error(`${chalk.magenta(message)}`);
+  console.error(`\u001b[35m${(message)}\u001b[0m`);
   await writeToLogFile(message, 'ERROR');
 }

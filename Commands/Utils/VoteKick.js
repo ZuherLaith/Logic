@@ -126,7 +126,7 @@ export default {
                 });
                 
                 setTimeout(() => {
-                    voiceChannel.permissionOverwrites.delete(target);
+                    voiceChannel.permissionOverwrites.delete(memberToKick);
                 }, kickDuration);
             }
             else if (yesVotes < noVotes) {
