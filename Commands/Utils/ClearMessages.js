@@ -1,11 +1,10 @@
 import { config } from '../../config.js';
-import { CreateEmbed } from '../../Utility/CreateEmbed.js';
 import Discord from 'discord.js';
 
 export default {
-    name: 'delete',
-    description: 'Delete the needed amount of messages',
-
+    name: 'مسح',
+    description: 'مسح العدد المطلوب من الرسائل',
+    usage: '<amount>',
     run: async (client, message, args) => {
         try 
         {

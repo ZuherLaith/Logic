@@ -62,7 +62,7 @@ export async function loadCommands(commands) {
       }
       consoleLog('Commands loaded successfully.');
   } catch (error) {
-      consoleError('Error loading commands:', error);
+      consoleError('Error loading commands: ' + error);
   }
 }
 async function loadListeners(directory = 'Listeners') {
@@ -83,7 +83,7 @@ async function loadListeners(directory = 'Listeners') {
     }
     consoleLog('Listeners loaded successfully.');
   } catch (error) {
-    consoleError('Error loading listeners:', error);
+    consoleError('Error loading listeners: ' + error);
   }
 }
 
